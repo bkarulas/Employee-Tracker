@@ -1,0 +1,19 @@
+{
+  "name": "employee_tracker",
+  "version": "1.0.0",
+  "description": "unit 12 assignment",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "employee",
+    "tracker"
+  ],
+  "author": "Brad Karulas",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^7.0.0",
+    "mysql": "^2.17.1"
+  }
+}
