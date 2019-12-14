@@ -12,6 +12,14 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   firstQuestion();
+  connection.query("SELECT * FROM role;", function(err, res){
+    if (err) throw err;
+   allRoles = res.map(role=>({name:role.title, value:role.id}));
+  });
+  connection.query("SELECT * FROM employee;",function (err,res){
+    if (err) throw err;
+    allEmployees = res.map(employee=>({name:`${employee.first_name} ${employee.last_name}`, value:employee.id}));
+  });
 });
 
 function firstQuestion() {
@@ -26,6 +34,7 @@ function firstQuestion() {
         "View All Employees By Department",
         "View All Employees By  Manager",
         "Add An Employee",
+        "Delete An Employee",
         "exit"
       ]
     })
@@ -43,8 +52,12 @@ function firstQuestion() {
         query = "SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager, CONCAT(employee.first_name, ' ', employee.last_name) AS employee FROM employee INNER JOIN employee manager on manager.id = employee.manager_id ORDER BY manager.id;"
         generalSearch(query);
         break;
-      case "Add An Employee"
-        addEmployee();
+      case "Add An Employee":
+        newEmployee();
+        break;
+      case "Delete An Employee":
+        deleteEmployee();
+        break;
       case "exit":
         connection.end();
         break;
@@ -61,5 +74,66 @@ function generalSearch(query){
   });
 }
 
+function newEmployee(){
+  inquirer
+    .prompt([
+    {
+      type:"input",
+      message:"What the the first name of the employee?",
+      name:"newFirstName"
+    },
+    {
+      type:"input",
+      message:"What is the last name of the employee?",
+      name:"newLastName"
+    },
+    {
+      type:"list",
+      message:"What is the role of the new employee?",
+      name:"newRole",
+      choices: allRoles
+    },
+    {
+      type:"list",
+      message:"Who will be the employee's manager?",
+      name:"newManager",
+      choices: allEmployees
+    }
+  ])
+  .then(function(answer) {
+    addEmployee(answer.newFirstName,answer.newLastName,answer.newRole,answer.newManager);
+    console.log(`The new employee:${answer.newFirstName} ${answer.newLastName} was added`);
+    firstQuestion()
+  })
+}
 
+function addEmployee(firstName, lastname, role, manager){
+  query = "INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES (?,?,?,?);"
+  connection.query(query,[firstName,lastname,role,manager], function(err, res){
+  })
+}
+
+function deleteEmployee(){
+  inquirer
+    .prompt([
+    {
+      type:"list",
+      message:"What employee would you like to delete?",
+      name:"employeeDelete",
+      choices: allEmployees
+    }
+  ])
+  .then(function(answer) {
+    removeEmployee(answer.employeeDelete);
+    console.log(`Employee ID:${answer.employeeDelete} was deleted`);
+    firstQuestion()
+  })
+}
+
+function removeEmployee(employeeId){
+  query = "DELETE FROM employee WHERE employee.id = ?;"
+  console.log(`ANSWER: ${employeeId}`);
+  connection.query(query,[employeeId], function(err, res){
+  });
+}
 
