@@ -16,6 +16,19 @@ SELECT name 'departments', CONCAT(employee.first_name, ' ', employee.last_name) 
 -- ALL EMPLOYEES BY MANAGER --
 SELECT CONCAT(manager.first_name, ' ', manager.last_name) AS manager, CONCAT(employee.first_name, ' ', employee.last_name) AS employee FROM employee INNER JOIN employee manager on manager.id = employee.manager_id ORDER BY manager.id;
     
+-- ADD NEW RECORD --
+INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Brad", "Karulas", 3, 2);
+
+-- DELETE RECORD --
+DELETE FROM employee WHERE employee.id = 14;
+
+-- UPDATE ROLE --
+UPDATE employee SET employee.role_id = 5 WHERE employee.id = 15;
+
+-- UPDATE MANAGER --
+UPDATE employee SET employee.manager_id = 6 WHERE employee.id = 15;
 
 
-SELECT first_name, last_name FROM employee WHERE 
+SELECT * FROM employee;
+SELECT * FROM role;
+SELECT * FROM department;

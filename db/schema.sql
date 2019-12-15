@@ -38,9 +38,9 @@ INSERT INTO department (name) VALUES ("Administration");
 SELECT * FROM department;
 
 INSERT INTO role (title, salary) VALUES ("Regional Manager",90000);
-INSERT INTO role (title, salary,department_id) VALUES ("Sales Manager",70000,1);
+INSERT INTO role (title, salary,department_id) VALUES ("Sales Manager",80000,1);
 INSERT INTO role (title, salary,department_id) VALUES ("Salesman",70000,1);
-INSERT INTO role (title, salary,department_id) VALUES ("Lead Accountant",60000,2);
+INSERT INTO role (title, salary,department_id) VALUES ("Lead Accountant",65000,2);
 INSERT INTO role (title, salary,department_id) VALUES ("Accountant",55000,2);
 INSERT INTO role (title, salary,department_id) VALUES ("Office Administratory",62500,3);
 INSERT INTO role (title, salary,department_id) VALUES ("Quality Control",52500,3);
@@ -56,8 +56,8 @@ INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Dwight"
 INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Stanley","Hudson",3,2);
 INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Phyllis","Lapin",3,2);
 INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Angela","Martin",4,1);
-INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Oscar","Gutierrez",4,6);
-INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Kevin","Malone",4,6);
+INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Oscar","Gutierrez",5,6);
+INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Kevin","Malone",5,6);
 INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Pam","Beasley",6,1);
 INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Creed","Bratton",7,9);
 INSERT INTO employee (first_name, last_name,role_id,manager_id) VALUES ("Meredith","Palmer",8,9);
